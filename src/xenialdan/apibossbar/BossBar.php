@@ -283,7 +283,13 @@ class BossBar
 	{
 		foreach ($players as $player) {
 			if (!$player->isConnected()) continue;
-			$player->getNetworkSession()->sendDataPacket(BossEventPacket::show($this->actorId ?? $player->getId(), $this->getFullTitle(), $this->getPercentage(), $this->getColor()));
+			$player->getNetworkSession()->sendDataPacket(BossEventPacket::show(
+				$this->actorId ?? $player->getId(),
+				$this->getFullTitle(),
+				$this->getPercentage(),
+				false,
+				$this->getColor()
+			));
 		}
 	}
 
@@ -328,7 +334,7 @@ class BossBar
 	 * @param Player|null $player Only used for DiverseBossBar
 	 * @return AttributeMap
 	 */
-	public function getAttributeMap(Player $player = null): AttributeMap
+	public function getAttributeMap(?Player $player = null): AttributeMap
 	{
 		return $this->attributeMap;
 	}
